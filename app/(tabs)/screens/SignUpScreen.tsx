@@ -2,7 +2,7 @@ import React, { useState, useEffect } from 'react';
 import { View, Text, TextInput, TouchableOpacity, StyleSheet, Animated, Alert } from 'react-native';
 import { LinearGradient } from 'expo-linear-gradient';
 import { signupUser, initializeDatabase } from '../../../hooks/database'; // Adjust the path as needed
-
+import { useNavigation } from '@react-navigation/native';  
 export default function SignUpScreen() {
   const [fadeAnim] = useState(new Animated.Value(0));
   const [fullName, setFullName] = useState('');
@@ -10,6 +10,7 @@ export default function SignUpScreen() {
   const [password, setPassword] = useState('');
   const [confirmPassword, setConfirmPassword] = useState('');
 
+  const navigation = useNavigation();
   useEffect(() => {
     Animated.timing(fadeAnim, {
       toValue: 1,
@@ -77,7 +78,7 @@ export default function SignUpScreen() {
         </TouchableOpacity>
 
         <Text style={styles.signInText}>
-          Already have an account? <Text style={styles.signInLink}>Sign In</Text>
+          Already have an account? <TouchableOpacity style={styles.signInLink} onPress={() => navigation.navigate('Login')}>Sign In</TouchableOpacity>
         </Text>
       </Animated.View>
     </LinearGradient>

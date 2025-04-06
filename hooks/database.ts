@@ -6,7 +6,7 @@ export type User = {
   password: string;
 };
 
-const db = SQLite.openDatabaseSync(':memory:'); // In-memory database
+const db = SQLite.openDatabaseSync(':memory:'); 
 
 // Initialize Database
 export const initializeDatabase = (): void => {
@@ -47,7 +47,7 @@ export const initializeDatabase = (): void => {
     );
   `);
 
-  console.log('✅ In-memory database initialized');
+  console.log('In-memory database initialized');
 };
 
 // SignUp User
@@ -84,7 +84,7 @@ export const loginUser = (
   email: string,
   password: string,
   callback: (success: boolean, message: string) => void,
-  login: (userId: number) => void // Accept the login function as a parameter
+  login: (userId: number) => void 
 ) => {
   const query = 'SELECT * FROM users WHERE email = ?';
   const user = db.getFirstSync(query, [email]);
@@ -95,7 +95,7 @@ export const loginUser = (
   }
 
   if (user.password === password) {
-    login(user.id);  // Call the login function from context to set the userId
+    login(user.id); 
     callback(true, 'Login successful!');
   } else {
     callback(false, 'Incorrect password');
